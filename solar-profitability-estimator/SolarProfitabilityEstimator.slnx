@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SolarProfitabilityEstimator.Api/SolarProfitabilityEstimator.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SolarProfitabilityEstimator.Tests/SolarProfitabilityEstimator.Tests.csproj" />
+  </Folder>
+</Solution>

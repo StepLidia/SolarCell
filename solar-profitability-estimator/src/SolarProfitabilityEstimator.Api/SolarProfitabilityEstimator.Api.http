@@ -1,0 +1,12 @@
+@hostAddress = http://localhost:5241
+
+POST {{hostAddress}}/solar/profitability/
+Content-Type: application/json
+
+{
+  "systemSizeKw": 10,
+  "annualYieldPerKw": 1200,
+  "electricityPricePerKwh": 0.42,
+  "installationCost": 22000,
+  "selfConsumptionRate": 0.65
+}
