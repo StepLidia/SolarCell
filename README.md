@@ -24,8 +24,8 @@ The project demonstrates:
 
 ```text
 backend: solar-profitability-estimator/
-                                    src/SolarProfitabilityEstimator.Api/
-                                    tests/
+            src/SolarProfitabilityEstimator.Api/
+            tests/
 frontend:
 ```
 
