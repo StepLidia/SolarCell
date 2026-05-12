@@ -8,6 +8,7 @@ The project demonstrates:
 - Dependency injection
 - Service layer abstraction
 - Unit testing with xUnit
+- Integration testing with WebApplicationFactory
 - Swagger/OpenAPI
 - HTTP request testing with `.http` files
 
@@ -22,18 +23,18 @@ The project demonstrates:
 ## Project Structure
 
 ```text
-src/
-    SolarProfitabilityEstimator.Api/
-tests/
-    SolarProfitabilityEstimator.Tests/
+backend: solar-profitability-estimator/
+                                    src/SolarProfitabilityEstimator.Api/
+                                    tests/
+frontend:
 ```
 
 ## Features
 
 The API calculates:
-- annual solar energy production,
-- estimated yearly savings,
-- estimated payback period.
+- annual solar energy production
+- estimated yearly savings
+- estimated payback period
 
 ## Run the Application
 
@@ -44,8 +45,8 @@ dotnet run --project src/SolarProfitabilityEstimator.Api
 ## Future Improvements
 
 Possible future extensions:
-- degradation modelling,
-- battery storage calculations,
-- solar irradiation API integration,
-- database persistence,
-- Docker support.
+- degradation modelling
+- battery storage calculations
+- solar irradiation API integration
+- database persistence
+- Docker support

@@ -42,7 +42,7 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
 
         decimal annualProductionKwh = request.SystemSizeKw * request.AnnualYieldPerKw;
         decimal annualSavings = annualProductionKwh * request.SelfConsumptionRate * request.ElectricityPricePerKwh;
-        decimal paybackYears = request.InstallationCost / annualSavings;
+        decimal paybackYears = annualSavings > 0 ? request.InstallationCost / annualSavings : 0;
 
         return new SolarEstimateResponse
         {
