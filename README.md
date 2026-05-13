@@ -23,10 +23,8 @@ The project demonstrates:
 ## Project Structure
 
 ```text
-backend: solar-profitability-estimator/
-            src/SolarProfitabilityEstimator.Api/
-            tests/
-frontend:
+backend C#: solar-profitability-estimator
+frontend React:
 ```
 
 ## Features

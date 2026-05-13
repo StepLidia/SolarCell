@@ -30,3 +30,19 @@ jobs:
 
       - name: Run tests
         run: dotnet test --configuration Release --no-build
+
+      - name: Build Docker image
+        run: docker build -t solar-cell-api ./src/SolarProfitabilityEstimator.Api
+        working-directory: backend
+
+      - name: Run container and smoke test
+        run: |
+          docker run -d --name solar-cell-api -p 8080:8080 solar-cell-api
+          sleep 5
+          curl --fail http://localhost:8080/swagger
+          docker stop solar-cell-api
+        working-directory: backend
+
+      - name: Stop Docker container
+        if: always()
+        run: docker stop solar-cell-api

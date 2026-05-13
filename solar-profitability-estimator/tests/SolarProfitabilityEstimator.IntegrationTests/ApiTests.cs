@@ -20,6 +20,7 @@ public sealed class ApiTests : IClassFixture<WebApplicationFactory<Program>>
     [Fact]
     public async Task PostCalculation_ExpectSuccess()
     {
+        // Arrange
         var request = new SolarEstimateRequest
         {
             SystemSizeKw = 5,
@@ -29,10 +30,12 @@ public sealed class ApiTests : IClassFixture<WebApplicationFactory<Program>>
             SelfConsumptionRate = 0.5m
         };
 
+        // Act
         HttpResponseMessage response = await client.PostAsJsonAsync(
             "/solar/profitability",
             request);
 
+        // Assert
         response.EnsureSuccessStatusCode();
 
         var result = await response.Content.ReadFromJsonAsync<SolarEstimateResponse>();
