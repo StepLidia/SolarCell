@@ -6,7 +6,7 @@ The project demonstrates:
 - ASP.NET Core Web API
 - Controller-based architecture
 - Dependency injection
-- Service layer abstraction
+- Docker image build
 - Unit testing with xUnit
 - Integration testing with WebApplicationFactory
 - Swagger/OpenAPI
@@ -47,4 +47,3 @@ Possible future extensions:
 - battery storage calculations
 - solar irradiation API integration
 - database persistence
-- Docker support
