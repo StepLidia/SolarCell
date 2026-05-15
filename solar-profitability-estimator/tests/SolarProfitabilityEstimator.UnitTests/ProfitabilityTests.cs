@@ -1,4 +1,6 @@
-﻿using SolarProfitabilityEstimator.Api.Models;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using SolarProfitabilityEstimator.Api.Models;
 using SolarProfitabilityEstimator.Api.Services;
 
 namespace SolarProfitabilityEstimator.Tests;
@@ -9,12 +11,23 @@ namespace SolarProfitabilityEstimator.Tests;
 /// </summary>
 public sealed class ProfitabilityTests
 {
+    /// <summary>
+    /// Instance of the SolarProfitabilityCalculator to be tested.
+    /// It is initialized with a NullLogger to avoid logging during tests.
+    /// </summary>
+    private readonly SolarProfitabilityCalculator calculator;
+
+    public ProfitabilityTests()
+    {
+        ILogger<SolarProfitabilityCalculator> logger = NullLogger<SolarProfitabilityCalculator>.Instance;
+
+        this.calculator = new SolarProfitabilityCalculator(logger);
+    }
+
     [Fact]
     public void Calculate_WithValidInput_ReturnsExpectedPayback()
     {
         // Arrange
-        ISolarProfitabilityCalculator calculator = new SolarProfitabilityCalculator();
-
         var request = new SolarEstimateRequest
         {
             SystemSizeKw = 8,
@@ -25,7 +38,7 @@ public sealed class ProfitabilityTests
         };
 
         // Act
-        SolarEstimateResponse result = calculator.Calculate(request);
+        SolarEstimateResponse result = this.calculator.Calculate(request);
 
         // Assert
         Assert.Equal(8800m, result.AnnualProductionKwh);
@@ -37,8 +50,6 @@ public sealed class ProfitabilityTests
     public void Calculate_WithNegativeInput_ExpectException()
     {
         // Arrange
-        ISolarProfitabilityCalculator calculator = new SolarProfitabilityCalculator();
-
         var request = new SolarEstimateRequest
         {
             SystemSizeKw = 8,
@@ -49,15 +60,13 @@ public sealed class ProfitabilityTests
         };
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => calculator.Calculate(request));
+        Assert.Throws<ArgumentException>(() => this.calculator.Calculate(request));
     }
 
     [Fact]
     public void Calculate_NoAnnualSavings_ExpectSuccess()
     {
         // Arrange
-        ISolarProfitabilityCalculator calculator = new SolarProfitabilityCalculator();
-
         var request = new SolarEstimateRequest
         {
             SystemSizeKw = 8,
