@@ -65,7 +65,7 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
         {
             AnnualProductionKwh = Math.Round(annualProductionKwh, 2),
             AnnualSavings = Math.Round(annualSavings, 2),
-            PaybackYears = Math.Round(paybackYears, 2)
+            PaybackYears = Math.Round(paybackYears, 2),
         };
     }
 }

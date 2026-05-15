@@ -77,7 +77,7 @@ public sealed class ProfitabilityTests
         };
 
         // Act
-        SolarEstimateResponse result = calculator.Calculate(request);
+        SolarEstimateResponse result = this.calculator.Calculate(request);
 
         // Assert
         Assert.Equal(8800m, result.AnnualProductionKwh);
