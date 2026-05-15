@@ -6,11 +6,12 @@ The project demonstrates:
 - ASP.NET Core Web API
 - Controller-based architecture
 - Dependency injection
-- Docker image build
 - Unit testing with xUnit
 - Integration testing with WebApplicationFactory
 - Swagger/OpenAPI
 - HTTP request testing with `.http` files
+- Docker image build and Github Container Registry
+- Deployment to Azure Cloud
 
 ## Technologies
 

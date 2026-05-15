@@ -14,9 +14,12 @@ public sealed class SolarController : ControllerBase
 {
     private readonly ISolarProfitabilityCalculator calculator;
 
-    public SolarController(ISolarProfitabilityCalculator calculator)
+    private readonly ILogger<SolarController> logger;
+
+    public SolarController(ISolarProfitabilityCalculator calculator, ILogger<SolarController> logger)
     {
         this.calculator = calculator;
+        this.logger = logger;
     }
 
     /// <summary>
@@ -31,12 +34,14 @@ public sealed class SolarController : ControllerBase
     {
         try
         {
-            SolarEstimateResponse response = calculator.Calculate(request);
+            SolarEstimateResponse response = this.calculator.Calculate(request);
 
             return Ok(response);
         }
         catch (ArgumentException exception)
         {
+            this.logger.LogError(exception, "Failed to calculate solar profitability: {ErrorMessage}", exception.Message);
+
             return BadRequest(new { error = exception.Message });
         }
     }

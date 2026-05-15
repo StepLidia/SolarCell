@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using SolarProfitabilityEstimator.Api.Models;
 
 namespace SolarProfitabilityEstimator.Api.Services;
@@ -7,6 +8,16 @@ namespace SolarProfitabilityEstimator.Api.Services;
 /// </summary>
 public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
 {
+    /// <summary>
+    /// Logger to log intermediate information in calculations
+    /// </summary>
+    private readonly ILogger<SolarProfitabilityCalculator> logger;
+
+    public SolarProfitabilityCalculator(ILogger<SolarProfitabilityCalculator> logger)
+    {
+        this.logger = logger;
+    }
+
     /// <summary>
     /// Calculates the annual production, savings, and payback period for a solar panel installation based on the provided request parameters.
     /// </summary>
@@ -40,9 +51,15 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
             throw new ArgumentException("Self-consumption rate must be between 0 and 1.");
         }
 
+        var stopwatch = Stopwatch.StartNew();
+
         decimal annualProductionKwh = request.SystemSizeKw * request.AnnualYieldPerKw;
         decimal annualSavings = annualProductionKwh * request.SelfConsumptionRate * request.ElectricityPricePerKwh;
         decimal paybackYears = annualSavings > 0 ? request.InstallationCost / annualSavings : 0;
+
+        stopwatch.Stop();
+
+        this.logger.LogInformation("Calculated solar profitability for {SystemSize}kW in {ElapsedMs}ms.", request.SystemSizeKw, stopwatch.ElapsedMilliseconds);
 
         return new SolarEstimateResponse
         {
