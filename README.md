@@ -10,7 +10,7 @@ The project demonstrates:
 - Integration testing with WebApplicationFactory
 - Swagger/OpenAPI
 - HTTP request testing with `.http` files
-- Docker image build and Github Container Registry
+- CI/CD pipelines with Docker image and GitHub Container Registry
 - Deployment to Azure Cloud
 
 ## Technologies

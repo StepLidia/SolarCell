@@ -10,7 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddOpenTelemetry().UseAzureMonitor();
+// Configure Azure Monitor OpenTelemetry integration
+string? appInsightsConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+
+if (!string.IsNullOrEmpty(appInsightsConnectionString))
+{
+    builder.Services.AddOpenTelemetry().UseAzureMonitor();
+}
 
 var app = builder.Build();
 
