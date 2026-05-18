@@ -7,8 +7,12 @@ namespace SolarProfitabilityEstimator.Api.Models;
 public sealed class SolarEstimateRequest
 {
     public decimal SystemSizeKw { get; set; }
+
     public decimal AnnualYieldPerKw { get; set; }
+
     public decimal ElectricityPricePerKwh { get; set; }
+
     public decimal InstallationCost { get; set; }
+
     public decimal SelfConsumptionRate { get; set; }
 }

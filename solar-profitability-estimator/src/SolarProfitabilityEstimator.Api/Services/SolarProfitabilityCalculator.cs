@@ -9,7 +9,7 @@ namespace SolarProfitabilityEstimator.Api.Services;
 public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
 {
     /// <summary>
-    /// Logger to log intermediate information in calculations
+    /// Logger to log intermediate information in calculations.
     /// </summary>
     private readonly ILogger<SolarProfitabilityCalculator> logger;
 
@@ -23,7 +23,7 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
     /// </summary>
     /// <param name="request">Model of request.</param>
     /// <returns>Model of response.</returns>
-    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="ArgumentException">Thrown when one or more input parameters are invalid.</exception>
     public SolarEstimateResponse Calculate(SolarEstimateRequest request)
     {
         if (request.SystemSizeKw <= 0)

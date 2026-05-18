@@ -6,6 +6,8 @@ namespace SolarProfitabilityEstimator.Api.Models;
 public sealed class SolarEstimateResponse
 {
     public decimal AnnualProductionKwh { get; set; }
+
     public decimal AnnualSavings { get; set; }
+
     public decimal PaybackYears { get; set; }
 }

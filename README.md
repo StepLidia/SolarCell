@@ -10,8 +10,8 @@ The project demonstrates:
 - Integration testing with WebApplicationFactory
 - Swagger/OpenAPI
 - HTTP request testing with `.http` files
+- Usage of dependabot
 - CI/CD pipelines with Docker image and GitHub Container Registry
-- Deployment to Azure Cloud
 
 ## Technologies
 
@@ -48,3 +48,4 @@ Possible future extensions:
 - battery storage calculations
 - solar irradiation API integration
 - database persistence
+- deployment to Azure Cloud

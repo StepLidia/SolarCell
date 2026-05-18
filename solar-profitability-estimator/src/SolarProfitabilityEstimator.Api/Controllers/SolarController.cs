@@ -25,8 +25,8 @@ public sealed class SolarController : ControllerBase
     /// <summary>
     /// Estimates the profitability of a solar panel installation based on the provided parameters in the request body.
     /// </summary>
-    /// <param name="request"></param>
-    /// <returns></returns>
+    /// <param name="request">Body of a request.</param>
+    /// <returns>Body of a response.</returns>
     [HttpPost("profitability")]
     [ProducesResponseType<SolarEstimateResponse>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -36,13 +36,13 @@ public sealed class SolarController : ControllerBase
         {
             SolarEstimateResponse response = this.calculator.Calculate(request);
 
-            return Ok(response);
+            return this.Ok(response);
         }
         catch (ArgumentException exception)
         {
             this.logger.LogError(exception, "Failed to calculate solar profitability: {ErrorMessage}", exception.Message);
 
-            return BadRequest(new { error = exception.Message });
+            return this.BadRequest(new { error = exception.Message });
         }
     }
 }
