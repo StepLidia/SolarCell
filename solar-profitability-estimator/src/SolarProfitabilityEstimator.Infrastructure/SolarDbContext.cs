@@ -14,4 +14,14 @@ public class SolarDbContext : DbContext
     }
 
     public DbSet<SolarEstimate> SolarEstimates => this.Set<SolarEstimate>();
+
+    /// <summary>
+    /// Configures the model by applying entity configurations from the assembly.
+    /// This method is called by the framework when the model is being created, allowing us to define how our entities map to the database schema.
+    /// </summary>
+    /// <param name="modelBuilder">The ModelBuilder used to configure entity mappings and relationships.</param>
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(SolarDbContext).Assembly);
+    }
 }

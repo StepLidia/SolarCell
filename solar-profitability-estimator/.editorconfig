@@ -12,3 +12,6 @@ dotnet_diagnostic.SA1600.severity = none
 [*.json]
 indent_style = space
 indent_size = 2
+
+[**/Migrations/*.cs]
+generated_code = true
