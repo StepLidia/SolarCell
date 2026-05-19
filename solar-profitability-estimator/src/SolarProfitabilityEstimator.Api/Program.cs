@@ -1,7 +1,14 @@
 using Azure.Monitor.OpenTelemetry.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 using SolarProfitabilityEstimator.Api.Services;
+using SolarProfitabilityEstimator.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<SolarDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SolarDb"));
+});
 
 builder.Services.AddSingleton<ISolarProfitabilityCalculator, SolarProfitabilityCalculator>();
 

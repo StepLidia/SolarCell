@@ -34,7 +34,7 @@ public sealed class ProfitabilityTests
             AnnualYieldPerKw = 1100,
             ElectricityPricePerKwh = 0.32m,
             InstallationCost = 22000,
-            SelfConsumptionRate = 0.65m
+            SelfConsumptionRate = 0.65m,
         };
 
         // Act
@@ -56,7 +56,7 @@ public sealed class ProfitabilityTests
             AnnualYieldPerKw = 1100,
             ElectricityPricePerKwh = -0.32m,
             InstallationCost = 22000,
-            SelfConsumptionRate = -0.65m
+            SelfConsumptionRate = -0.65m,
         };
 
         // Act & Assert
@@ -73,7 +73,7 @@ public sealed class ProfitabilityTests
             AnnualYieldPerKw = 1100,
             ElectricityPricePerKwh = 0.22m,
             InstallationCost = 22000,
-            SelfConsumptionRate = 0.0m
+            SelfConsumptionRate = 0.0m,
         };
 
         // Act

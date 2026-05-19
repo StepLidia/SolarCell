@@ -13,4 +13,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SolarProfitabilityEstimator.Domain\SolarProfitabilityEstimator.Domain.csproj" />
+    <ProjectReference Include="..\SolarProfitabilityEstimator.Infrastructure\SolarProfitabilityEstimator.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

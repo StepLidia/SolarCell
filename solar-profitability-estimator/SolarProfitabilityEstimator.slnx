@@ -1,6 +1,8 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/SolarProfitabilityEstimator.Api/SolarProfitabilityEstimator.Api.csproj" />
+    <Project Path="src/SolarProfitabilityEstimator.Domain/SolarProfitabilityEstimator.Domain.csproj" />
+    <Project Path="src/SolarProfitabilityEstimator.Infrastructure/SolarProfitabilityEstimator.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/SolarProfitabilityEstimator.IntegrationTests/SolarProfitabilityEstimator.IntegrationTests.csproj" />

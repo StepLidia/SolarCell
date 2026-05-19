@@ -4,8 +4,8 @@ A small ASP.NET Core Web API for estimating residential solar panel profitabilit
 
 The project demonstrates:
 - ASP.NET Core Web API
-- Controller-based architecture
 - Dependency injection
+- EF Core and migrations
 - Unit testing with xUnit
 - Integration testing with WebApplicationFactory
 - Swagger/OpenAPI

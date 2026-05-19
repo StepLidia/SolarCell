@@ -14,7 +14,7 @@ public sealed class ApiTests : IClassFixture<WebApplicationFactory<Program>>
 
     public ApiTests(WebApplicationFactory<Program> factory)
     {
-        client = factory.CreateClient();
+        this.client = factory.CreateClient();
     }
 
     [Fact]
@@ -27,11 +27,11 @@ public sealed class ApiTests : IClassFixture<WebApplicationFactory<Program>>
             AnnualYieldPerKw = 1200,
             ElectricityPricePerKwh = 0.25m,
             InstallationCost = 15000,
-            SelfConsumptionRate = 0.5m
+            SelfConsumptionRate = 0.5m,
         };
 
         // Act
-        HttpResponseMessage response = await client.PostAsJsonAsync(
+        HttpResponseMessage response = await this.client.PostAsJsonAsync(
             "/solar/profitability",
             request);
 

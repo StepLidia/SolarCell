@@ -8,3 +8,7 @@ dotnet_diagnostic.SA1633.severity = none
 
 # SA1600: Elements should be documented
 dotnet_diagnostic.SA1600.severity = none
+
+[*.json]
+indent_style = space
+indent_size = 2
