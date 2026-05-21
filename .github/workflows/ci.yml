@@ -32,7 +32,7 @@ jobs:
         run: dotnet test --configuration Release --no-build
 
       - name: Build Docker image
-        run: docker build -t solar-cell-api ./src/SolarProfitabilityEstimator.Api
+        run: docker build -t solar-cell-api -f ./solar-profitability-estimator/src/SolarProfitabilityEstimator.Api/Dockerfile .
 
       - name: Run container and smoke test
         run: |

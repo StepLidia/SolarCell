@@ -31,9 +31,10 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
+            -f solar-profitability-estimator/src/SolarProfitabilityEstimator.Api/Dockerfile \
             -t $IMAGE_NAME:${{ github.sha }} \
             -t $IMAGE_NAME:latest \
-            ./src/SolarProfitabilityEstimator.Api
+            .
 
       - name: Push Docker image
         run: |

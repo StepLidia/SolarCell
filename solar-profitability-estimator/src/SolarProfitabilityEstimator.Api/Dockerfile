@@ -1,11 +1,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-COPY ["SolarProfitabilityEstimator.Api.csproj", "."]
-RUN dotnet restore "SolarProfitabilityEstimator.Api.csproj"
+COPY ["solar-profitability-estimator/src/SolarProfitabilityEstimator.Api/SolarProfitabilityEstimator.Api.csproj", "SolarProfitabilityEstimator.Api/"]
+COPY ["solar-profitability-estimator/src/SolarProfitabilityEstimator.Domain/SolarProfitabilityEstimator.Domain.csproj", "SolarProfitabilityEstimator.Domain/"]
+COPY ["solar-profitability-estimator/src/SolarProfitabilityEstimator.Infrastructure/SolarProfitabilityEstimator.Infrastructure.csproj", "SolarProfitabilityEstimator.Infrastructure/"]
 
-COPY . .
-RUN dotnet publish "SolarProfitabilityEstimator.Api.csproj" -c Release -o /app/publish
+RUN dotnet restore "SolarProfitabilityEstimator.Api/SolarProfitabilityEstimator.Api.csproj"
+
+COPY solar-profitability-estimator/src/ .
+RUN dotnet publish "SolarProfitabilityEstimator.Api/SolarProfitabilityEstimator.Api.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
