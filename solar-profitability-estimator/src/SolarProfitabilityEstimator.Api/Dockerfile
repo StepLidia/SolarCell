@@ -7,7 +7,7 @@ COPY ["src/SolarProfitabilityEstimator.Infrastructure/SolarProfitabilityEstimato
 
 RUN dotnet restore "SolarProfitabilityEstimator.Api/SolarProfitabilityEstimator.Api.csproj"
 
-COPY solar-profitability-estimator/src/ .
+COPY src/ .
 RUN dotnet publish "SolarProfitabilityEstimator.Api/SolarProfitabilityEstimator.Api.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
