@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SolarProfitabilityEstimator.Domain;
+using SolarProfitabilityEstimator.Domain.Entities;
 
 namespace SolarProfitabilityEstimator.Infrastructure;
 

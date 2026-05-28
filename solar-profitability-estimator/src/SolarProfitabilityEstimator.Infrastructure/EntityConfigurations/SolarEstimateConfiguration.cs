@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SolarProfitabilityEstimator.Domain;
+using SolarProfitabilityEstimator.Domain.Entities;
 
 public class SolarEstimateConfiguration : IEntityTypeConfiguration<SolarEstimate>
 {

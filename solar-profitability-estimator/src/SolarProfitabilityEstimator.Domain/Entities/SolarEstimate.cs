@@ -1,4 +1,4 @@
-﻿namespace SolarProfitabilityEstimator.Domain;
+﻿namespace SolarProfitabilityEstimator.Domain.Entities;
 
 /// <summary>
 /// Entity to store solar calculation results in the database.

@@ -24,7 +24,7 @@ The project demonstrates:
 ## Project Structure
 
 ```text
-backend C#: solar-profitability-estimator
+backend C#: solar-profitability-estimator, Onion architecture (Api/Application layers collapsed for simplicity)
 frontend React:
 ```
 
