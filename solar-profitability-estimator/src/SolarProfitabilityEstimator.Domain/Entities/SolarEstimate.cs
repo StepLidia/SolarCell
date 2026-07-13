@@ -21,5 +21,5 @@ public class SolarEstimate
     /// <summary>
     /// Gets or sets the date and time when the solar estimate was created UTC time.
     /// </summary>
-    public DateTime DateCreated { get; set; }
+    public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 }

@@ -25,6 +25,16 @@ jobs:
       - name: Restore
         run: dotnet restore
 
+      - name: Install EF Core tools
+        run: dotnet tool install --global dotnet-ef
+              
+      - name: Check pending migrations
+        run: >
+          dotnet ef migrations has-pending-model-changes
+          --project src/SolarProfitabilityEstimator.Infrastructure
+          --startup-project src/SolarProfitabilityEstimator.Api
+          --configuration Release
+
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
