@@ -1,6 +1,8 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.DependencyInjection;
 using SolarProfitabilityEstimator.Application.Models;
+using SolarProfitabilityEstimator.Infrastructure;
 
 namespace SolarProfitabilityEstimator.IntegrationTests;
 
@@ -8,12 +10,15 @@ namespace SolarProfitabilityEstimator.IntegrationTests;
 /// Contains integration tests for the Solar Profitability Estimator API to verify that the endpoints are functioning correctly and returning expected results.
 /// The tests use a WebApplicationFactory to create an in-memory instance of the API and send HTTP requests to the endpoints, asserting on the responses received.
 /// </summary>
-public sealed class ApiTests : IClassFixture<WebApplicationFactory<Program>>
+public sealed class ApiTests : IClassFixture<ApiWebApplicationFactory>
 {
+    private readonly ApiWebApplicationFactory factory;
+
     private readonly HttpClient client;
 
-    public ApiTests(WebApplicationFactory<Program> factory)
+    public ApiTests(ApiWebApplicationFactory factory)
     {
+        this.factory = factory;
         this.client = factory.CreateClient();
     }
 
@@ -44,5 +49,11 @@ public sealed class ApiTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.True(result.AnnualProductionKwh > 0);
         Assert.True(result.AnnualSavings > 0);
         Assert.True(result.PaybackYears > 0);
+
+        using IServiceScope scope = this.factory.Services.CreateScope();
+
+        SolarDbContext dbContext = scope.ServiceProvider.GetRequiredService<SolarDbContext>();
+
+        Assert.Single(dbContext.SolarEstimates);
     }
 }

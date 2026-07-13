@@ -6,7 +6,7 @@ namespace SolarProfitabilityEstimator.Infrastructure.Services;
 /// <summary>
 /// Implements the ISolarRepository interface to handle the persistence of solar estimates to the database.
 /// </summary>
-public class SolarRepository : ISolarRepository
+public sealed class SolarRepository : ISolarRepository
 {
     private readonly SolarDbContext dbContext;
 
