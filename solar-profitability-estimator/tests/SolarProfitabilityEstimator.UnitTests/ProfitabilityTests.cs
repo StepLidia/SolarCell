@@ -38,7 +38,7 @@ public sealed class ProfitabilityTests
         };
 
         // Act
-        SolarEstimateResponse result = this.calculator.Calculate(request);
+        SolarEstimateResponse result = this.calculator.CalculateAsync(request);
 
         // Assert
         Assert.Equal(8800m, result.AnnualProductionKwh);
@@ -60,7 +60,7 @@ public sealed class ProfitabilityTests
         };
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => this.calculator.Calculate(request));
+        Assert.Throws<ArgumentException>(() => this.calculator.CalculateAsync(request));
     }
 
     [Fact]
@@ -77,7 +77,7 @@ public sealed class ProfitabilityTests
         };
 
         // Act
-        SolarEstimateResponse result = this.calculator.Calculate(request);
+        SolarEstimateResponse result = this.calculator.CalculateAsync(request);
 
         // Assert
         Assert.Equal(8800m, result.AnnualProductionKwh);

@@ -30,11 +30,11 @@ public sealed class SolarController : ControllerBase
     [HttpPost("profitability")]
     [ProducesResponseType<SolarEstimateResponse>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<SolarEstimateResponse> Estimate([FromBody] SolarEstimateRequest request)
+    public async Task<ActionResult<SolarEstimateResponse>> Estimate([FromBody] SolarEstimateRequest request)
     {
         try
         {
-            SolarEstimateResponse response = this.calculator.Calculate(request);
+            SolarEstimateResponse response = await this.calculator.CalculateAsync(request);
 
             return this.Ok(response);
         }

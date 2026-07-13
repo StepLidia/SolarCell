@@ -5,7 +5,7 @@ using SolarProfitabilityEstimator.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<ISolarProfitabilityCalculator, SolarProfitabilityCalculator>();
+builder.Services.AddScoped<ISolarProfitabilityCalculator, SolarProfitabilityCalculator>();
 
 builder.Services.AddControllers();
 

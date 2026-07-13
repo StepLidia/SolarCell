@@ -11,12 +11,18 @@ namespace SolarProfitabilityEstimator.Application.Services;
 public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
 {
     /// <summary>
+    /// Repository to access solar-related data, if needed for future enhancements or calculations.
+    /// </summary>
+    private readonly ISolarRepository solarRepository;
+
+    /// <summary>
     /// Logger to log intermediate information in calculations.
     /// </summary>
     private readonly ILogger<SolarProfitabilityCalculator> logger;
 
-    public SolarProfitabilityCalculator(ILogger<SolarProfitabilityCalculator> logger)
+    public SolarProfitabilityCalculator(ISolarRepository solarRepository, ILogger<SolarProfitabilityCalculator> logger)
     {
+        this.solarRepository = solarRepository;
         this.logger = logger;
     }
 
@@ -26,7 +32,7 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
     /// <param name="request">Model of request.</param>
     /// <returns>Model of response.</returns>
     /// <exception cref="ArgumentException">Thrown when one or more input parameters are invalid.</exception>
-    public SolarEstimateResponse Calculate(SolarEstimateRequest request)
+    public async Task<SolarEstimateResponse> CalculateAsync(SolarEstimateRequest request)
     {
         if (request.SystemSizeKw <= 0)
         {
@@ -63,11 +69,26 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
 
         this.logger.LogInformation("Calculated solar profitability for {SystemSize}kW in {ElapsedMs}ms.", request.SystemSizeKw, stopwatch.ElapsedMilliseconds);
 
-        return new SolarEstimateResponse
+        var result = new SolarEstimateResponse
         {
             AnnualProductionKwh = Math.Round(annualProductionKwh, 2),
             AnnualSavings = Math.Round(annualSavings, 2),
             PaybackYears = Math.Round(paybackYears, 2),
         };
+
+        var dbEntry = new Domain.Entities.SolarEstimate
+        {
+            Id = Guid.NewGuid(),
+            TrackingId = request.ClientId,
+            SystemSizeKw = request.SystemSizeKw,
+            AnnualProductionKwh = result.AnnualProductionKwh,
+            AnnualSavings = result.AnnualSavings,
+        };
+
+        await this.solarRepository.SaveEstimateAsync(dbEntry);
+
+        this.logger.LogInformation("Saved solar estimate with client ID {ClientId}.", request.ClientId);
+
+        return result;
     }
 }

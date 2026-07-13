@@ -7,6 +7,11 @@ public class SolarEstimate
 {
     public Guid Id { get; set; }
 
+    /// <summary>
+    /// Gets or sets the tracking identifier associated with the solar estimate.
+    /// </summary>
+    public Guid TrackingId { get; set; }
+
     public decimal SystemSizeKw { get; set; }
 
     public decimal AnnualProductionKwh { get; set; }

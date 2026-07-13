@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SolarProfitabilityEstimator.Application.Interfaces;
+using SolarProfitabilityEstimator.Infrastructure.Services;
 
 namespace SolarProfitabilityEstimator.Infrastructure;
 
@@ -15,6 +17,8 @@ public static class DependencyInjection
         {
             options.UseSqlServer(configuration.GetConnectionString("SolarDb"));
         });
+
+        services.AddScoped<ISolarRepository, SolarRepository>();
 
         return services;
     }

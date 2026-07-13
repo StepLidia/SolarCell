@@ -12,5 +12,5 @@ public interface ISolarProfitabilityCalculator
     /// </summary>
     /// <param name="request">Model of a request containing the parameters for the calculation.</param>
     /// <returns>A response containing the estimated profitability metrics.</returns>
-    SolarEstimateResponse Calculate(SolarEstimateRequest request);
+    Task<SolarEstimateResponse> CalculateAsync(SolarEstimateRequest request);
 }

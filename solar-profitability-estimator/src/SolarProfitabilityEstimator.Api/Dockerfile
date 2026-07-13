@@ -2,6 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
 COPY ["src/SolarProfitabilityEstimator.Api/SolarProfitabilityEstimator.Api.csproj", "SolarProfitabilityEstimator.Api/"]
+COPY ["src/SolarProfitabilityEstimator.Application/SolarProfitabilityEstimator.Application.csproj", "SolarProfitabilityEstimator.Application/"]
 COPY ["src/SolarProfitabilityEstimator.Domain/SolarProfitabilityEstimator.Domain.csproj", "SolarProfitabilityEstimator.Domain/"]
 COPY ["src/SolarProfitabilityEstimator.Infrastructure/SolarProfitabilityEstimator.Infrastructure.csproj", "SolarProfitabilityEstimator.Infrastructure/"]
 

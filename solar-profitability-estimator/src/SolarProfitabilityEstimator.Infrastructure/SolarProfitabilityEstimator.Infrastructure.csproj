@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SolarProfitabilityEstimator.Domain\SolarProfitabilityEstimator.Domain.csproj" />
+    <ProjectReference Include="..\SolarProfitabilityEstimator.Application\SolarProfitabilityEstimator.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
