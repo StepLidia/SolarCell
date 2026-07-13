@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SolarProfitabilityEstimator.Api.Models;
-using SolarProfitabilityEstimator.Api.Services;
+using SolarProfitabilityEstimator.Application.Interfaces;
+using SolarProfitabilityEstimator.Application.Models;
 
 namespace SolarProfitabilityEstimator.Api.Controllers;
 

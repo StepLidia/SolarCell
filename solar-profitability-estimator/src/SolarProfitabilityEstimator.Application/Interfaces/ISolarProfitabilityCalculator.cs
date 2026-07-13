@@ -1,6 +1,6 @@
-using SolarProfitabilityEstimator.Api.Models;
+using SolarProfitabilityEstimator.Application.Models;
 
-namespace SolarProfitabilityEstimator.Api.Services;
+namespace SolarProfitabilityEstimator.Application.Interfaces;
 
 /// <summary>
 /// Defines an interface for calculating the profitability of a solar panel installation.

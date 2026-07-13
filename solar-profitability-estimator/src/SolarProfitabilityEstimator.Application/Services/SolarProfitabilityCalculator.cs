@@ -1,7 +1,9 @@
 using System.Diagnostics;
-using SolarProfitabilityEstimator.Api.Models;
+using Microsoft.Extensions.Logging;
+using SolarProfitabilityEstimator.Application.Interfaces;
+using SolarProfitabilityEstimator.Application.Models;
 
-namespace SolarProfitabilityEstimator.Api.Services;
+namespace SolarProfitabilityEstimator.Application.Services;
 
 /// <summary>
 /// Provides functionality to calculate the profitability of a solar panel installation based on input parameters such as system size, annual yield, electricity price, installation cost, and self-consumption rate.

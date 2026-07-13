@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\SolarProfitabilityEstimator.Api\SolarProfitabilityEstimator.Api.csproj" />
+    <ProjectReference Include="..\..\src\SolarProfitabilityEstimator.Application\SolarProfitabilityEstimator.Application.csproj" />
   </ItemGroup>
 
 </Project>

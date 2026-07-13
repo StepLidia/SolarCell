@@ -1,4 +1,4 @@
-namespace SolarProfitabilityEstimator.Api.Models;
+namespace SolarProfitabilityEstimator.Application.Models;
 
 /// <summary>
 /// Represents a request for estimating the profitability of a solar panel installation.
@@ -6,6 +6,8 @@ namespace SolarProfitabilityEstimator.Api.Models;
 /// </summary>
 public sealed class SolarEstimateRequest
 {
+    public Guid ClientId { get; set; }
+
     public decimal SystemSizeKw { get; set; }
 
     public decimal AnnualYieldPerKw { get; set; }

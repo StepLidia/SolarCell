@@ -1,4 +1,4 @@
-namespace SolarProfitabilityEstimator.Api.Models;
+namespace SolarProfitabilityEstimator.Application.Models;
 
 /// <summary>
 /// Represents a response for estimating the profitability of a solar panel installation.

@@ -10,15 +10,12 @@
   <ItemGroup>
     <PackageReference Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.8">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SolarProfitabilityEstimator.Domain\SolarProfitabilityEstimator.Domain.csproj" />
+    <ProjectReference Include="..\SolarProfitabilityEstimator.Application\SolarProfitabilityEstimator.Application.csproj" />
     <ProjectReference Include="..\SolarProfitabilityEstimator.Infrastructure\SolarProfitabilityEstimator.Infrastructure.csproj" />
   </ItemGroup>
 

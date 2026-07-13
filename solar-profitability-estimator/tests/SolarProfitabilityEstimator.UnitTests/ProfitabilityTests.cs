@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using SolarProfitabilityEstimator.Api.Models;
-using SolarProfitabilityEstimator.Api.Services;
+using SolarProfitabilityEstimator.Application.Models;
+using SolarProfitabilityEstimator.Application.Services;
 
 namespace SolarProfitabilityEstimator.Tests;
 

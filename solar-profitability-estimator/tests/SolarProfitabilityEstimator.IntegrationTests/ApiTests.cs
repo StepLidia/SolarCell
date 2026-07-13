@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Microsoft.AspNetCore.Mvc.Testing;
-using SolarProfitabilityEstimator.Api.Models;
+using SolarProfitabilityEstimator.Application.Models;
 
 namespace SolarProfitabilityEstimator.IntegrationTests;
 
