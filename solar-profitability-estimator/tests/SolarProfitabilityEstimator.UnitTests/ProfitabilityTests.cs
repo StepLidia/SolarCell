@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using Moq;
+using SolarProfitabilityEstimator.Application.Interfaces;
 using SolarProfitabilityEstimator.Application.Models;
 using SolarProfitabilityEstimator.Application.Services;
+using SolarProfitabilityEstimator.Domain.Entities;
 
 namespace SolarProfitabilityEstimator.Tests;
 
@@ -20,12 +23,15 @@ public sealed class ProfitabilityTests
     public ProfitabilityTests()
     {
         ILogger<SolarProfitabilityCalculator> logger = NullLogger<SolarProfitabilityCalculator>.Instance;
+        Mock<ISolarRepository> mockRepository = new Mock<ISolarRepository>();
 
-        this.calculator = new SolarProfitabilityCalculator(logger);
+        mockRepository.Setup(repo => repo.SaveEstimateAsync(It.IsAny<SolarEstimate>())).Returns(Task.CompletedTask);
+
+        this.calculator = new SolarProfitabilityCalculator(mockRepository.Object, logger);
     }
 
     [Fact]
-    public void Calculate_WithValidInput_ReturnsExpectedPayback()
+    public async Task Calculate_WithValidInput_ReturnsExpectedPayback()
     {
         // Arrange
         var request = new SolarEstimateRequest
@@ -38,7 +44,7 @@ public sealed class ProfitabilityTests
         };
 
         // Act
-        SolarEstimateResponse result = this.calculator.CalculateAsync(request);
+        SolarEstimateResponse result = await this.calculator.CalculateAsync(request);
 
         // Assert
         Assert.Equal(8800m, result.AnnualProductionKwh);
@@ -47,7 +53,7 @@ public sealed class ProfitabilityTests
     }
 
     [Fact]
-    public void Calculate_WithNegativeInput_ExpectException()
+    public async Task Calculate_WithNegativeInput_ExpectException()
     {
         // Arrange
         var request = new SolarEstimateRequest
@@ -60,11 +66,11 @@ public sealed class ProfitabilityTests
         };
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => this.calculator.CalculateAsync(request));
+        await Assert.ThrowsAsync<ArgumentException>(async () => await this.calculator.CalculateAsync(request));
     }
 
     [Fact]
-    public void Calculate_NoAnnualSavings_ExpectSuccess()
+    public async Task Calculate_NoAnnualSavings_ExpectSuccess()
     {
         // Arrange
         var request = new SolarEstimateRequest
@@ -77,7 +83,7 @@ public sealed class ProfitabilityTests
         };
 
         // Act
-        SolarEstimateResponse result = this.calculator.CalculateAsync(request);
+        SolarEstimateResponse result = await this.calculator.CalculateAsync(request);
 
         // Assert
         Assert.Equal(8800m, result.AnnualProductionKwh);
