@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using SolarProfitabilityEstimator.Application.Interfaces;
 using SolarProfitabilityEstimator.Application.Models;
+using SolarProfitabilityEstimator.Application.Optimization;
 
 namespace SolarProfitabilityEstimator.Application.Services;
 
@@ -26,12 +27,7 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
         this.logger = logger;
     }
 
-    /// <summary>
-    /// Calculates the annual production, savings, and payback period for a solar panel installation based on the provided request parameters.
-    /// </summary>
-    /// <param name="request">Model of request.</param>
-    /// <returns>Model of response.</returns>
-    /// <exception cref="ArgumentException">Thrown when one or more input parameters are invalid.</exception>
+    /// <inheritdoc />
     public async Task<SolarEstimateResponse> CalculateAsync(SolarEstimateRequest request)
     {
         if (request.SystemSizeKw <= 0)
@@ -90,5 +86,24 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
         this.logger.LogInformation("Saved solar estimate with client ID {ClientId}.", request.ClientId);
 
         return result;
+    }
+
+    /// <inheritdoc />
+    public SolarOptimizationResult OptimizeSolarPanelOrientation(SolarOptimizationInput input)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static double CalculateTotalEnergy(SolarOptimizationInput input, double tiltAngle, double azimuthAngle)
+    {
+        // calculate sun position based on latitude, longitude and time of year
+        var sunPosition = 0.0;
+
+        if (sunPosition < 0)
+        {
+            return 0; // sun is below the horizon
+        }
+
+        return 0.0;
     }
 }

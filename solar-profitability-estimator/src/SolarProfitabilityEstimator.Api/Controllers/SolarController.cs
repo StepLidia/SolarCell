@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SolarProfitabilityEstimator.Application.Interfaces;
 using SolarProfitabilityEstimator.Application.Models;
+using SolarProfitabilityEstimator.Application.Optimization;
 
 namespace SolarProfitabilityEstimator.Api.Controllers;
 
@@ -41,6 +42,24 @@ public sealed class SolarController : ControllerBase
         catch (ArgumentException exception)
         {
             this.logger.LogError(exception, "Failed to calculate solar profitability: {ErrorMessage}", exception.Message);
+
+            return this.BadRequest(new { error = exception.Message });
+        }
+    }
+
+    public async Task<ActionResult<SolarOptimizationResult>> Optimize([FromBody] SolarOptimizationInput input)
+    {
+        try
+        {
+            // get API data for weather sample
+
+            SolarOptimizationResult result = this.calculator.OptimizeSolarPanelOrientation(input);
+
+            return this.Ok(result);
+        }
+        catch (ArgumentException exception)
+        {
+            this.logger.LogError(exception, "Failed to optimize solar panel orientation: {ErrorMessage}", exception.Message);
 
             return this.BadRequest(new { error = exception.Message });
         }
