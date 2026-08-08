@@ -96,14 +96,55 @@ public sealed class SolarProfitabilityCalculator : ISolarProfitabilityCalculator
 
     private static double CalculateTotalEnergy(SolarOptimizationInput input, double tiltAngle, double azimuthAngle)
     {
-        // calculate sun position based on latitude, longitude and time of year
-        var sunPosition = 0.0;
-
-        if (sunPosition < 0)
+        if (input.Weather.Count < 2)
         {
-            return 0; // sun is below the horizon
+            throw new ArgumentException("At least two weather samples are required to calculate total energy.");
+        }
+
+        for (int i = 0; i < input.Weather.Count; i++)
+        {
+            var sample = input.Weather[i];
+            var nextSample = input.Weather[i + 1];
+
+            var timeDifferenceHours = (nextSample.Timestamp - sample.Timestamp).TotalHours;
+
+            if (timeDifferenceHours <= 0)
+            {
+                throw new ArgumentException("Weather samples must be in a chronological order and have a positive time difference.");
+            }
+
+            // calculate sun position based on latitude, longitude and time of year
+            (double sunAltitude, double sunAzimuth) = (0.0, 0.0);
+
+            if (sunAltitude < 0)
+            {
+                continue; // sun is below the horizon
+            }
+
+            var incidenceCosine = CalculateIncidenceCosine(tiltAngle, azimuthAngle, sunAltitude, sunAzimuth); // assuming sun azimuth is 0 for simplicity
+
+            var directIrradiance = sample.DirectNormalIrradiance * incidenceCosine;
+            var diffuseIrradiance = sample.DiffuseHorizontalIrradiance * (1 + Math.Cos(double.DegreesToRadians(tiltAngle))) / 2;
+            var reflectedIrradiance = sample.GlobalHorizontalIrradiance * 0.2 * (1 - Math.Cos(double.DegreesToRadians(tiltAngle))) / 2; // assuming 20% ground reflectivity
+
+            var panelIrradiance = Math.Max(0, directIrradiance + diffuseIrradiance + reflectedIrradiance);
         }
 
         return 0.0;
+    }
+
+    private static double CalculateIncidenceCosine(double panelTiltAngle, double panelAzimuthAngle, double sunAltitudeAngle, double sunAzimuthAngle)
+    {
+        // Convert angles from degrees to radians
+        double tiltRad = double.DegreesToRadians(panelTiltAngle);
+        double azimuthRad = double.DegreesToRadians(panelAzimuthAngle);
+        double sunAltitudeRad = double.DegreesToRadians(sunAltitudeAngle);
+        double sunAzimuthRad = double.DegreesToRadians(sunAzimuthAngle);
+
+        // Calculate the cosine of the incidence angle
+        double cosIncidence = (Math.Sin(sunAltitudeRad) * Math.Cos(tiltRad)) +
+                              (Math.Cos(sunAltitudeRad) * Math.Sin(tiltRad) * Math.Cos(sunAzimuthRad - azimuthRad));
+
+        return Math.Max(0, cosIncidence);
     }
 }
